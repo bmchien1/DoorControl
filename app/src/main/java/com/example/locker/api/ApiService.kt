@@ -1,19 +1,35 @@
 package com.example.locker.api
 
-import com.example.locker.models.HistoryItem
-import com.example.locker.models.UnlockRequest
-import com.example.locker.models.UnlockResponse
-import com.example.locker.models.User
+import com.example.locker.models.CardCheckResponse
+import com.example.locker.models.HistoryResponse
+import com.example.locker.models.LoginRequest
+import com.example.locker.models.LoginResponse
+import com.example.locker.models.RegisterUserRequest
+import com.example.locker.models.SimpleResponse
 import retrofit2.Call
 import retrofit2.http.*
 
 interface ApiService {
-    @POST("unlock")
-    fun unlock(@Body request: UnlockRequest): Call<UnlockResponse>
 
-    @GET("history")
-    fun getHistory(): Call<List<HistoryItem>>
+    @POST("iot/api/login")
+    fun login(@Body loginRequest: LoginRequest): Call<LoginResponse>
 
-    @POST("user")
-    fun updateUser(@Body user: User): Call<User>
+    @POST("iot/api/register-user")
+    fun registerUser(
+        @Header("Authorization") token: String,
+        @Body registerUserRequest: RegisterUserRequest
+    ): Call<SimpleResponse>
+
+    @GET("iot/api/check-card/{idCard}")
+    fun checkCard(
+        @Path("idCard") idCard: String
+    ): Call<SimpleResponse>
+
+    @GET("iot/api/open-door")
+    fun openDoor(@Header("Authorization") token: String): Call<SimpleResponse>
+
+    @GET("iot/api/history")
+    fun getHistory(@Header("Authorization") token: String): Call<HistoryResponse>
+
+
 }

@@ -4,7 +4,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object ApiClient {
-    private const val BASE_URL = "http://yourserver.com/api/"
+    private const val BASE_URL = "http://localhost/"
 
     val instance: ApiService by lazy {
         Retrofit.Builder()
@@ -12,5 +12,6 @@ object ApiClient {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(ApiService::class.java)
+//        MockApiService()
     }
 }

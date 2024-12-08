@@ -1,25 +1,24 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="16dp"
-    android:background="?attr/selectableItemBackground">
+    android:padding="8dp">
 
     <TextView
-        android:id="@+id/tv_timestamp"
+        android:id="@+id/fullName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Thời gian"
-        android:textStyle="bold"
-        android:textSize="16sp"
-        android:layout_marginBottom="4dp" />
+        android:text="Full Name" />
 
     <TextView
-        android:id="@+id/tv_user_id"
+        android:id="@+id/idCard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Người dùng"
-        android:textSize="14sp" />
+        android:text="ID Card" />
+
+    <TextView
+        android:id="@+id/openAt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Open At" />
 </LinearLayout>
