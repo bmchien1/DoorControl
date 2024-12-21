@@ -26,6 +26,10 @@
         <activity
             android:name=".ui.LoginActivity"
             android:exported="false" />
+<!--        HistoryActivity-->
+        <activity android:name=".ui.HistoryActivity" />
+<!--        AddCardActivity-->
+        <activity android:name=".ui.AddCardActivity" />
 
     </application>
 
