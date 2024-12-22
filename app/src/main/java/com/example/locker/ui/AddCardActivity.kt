@@ -1,11 +1,13 @@
 package com.example.locker.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import com.example.locker.MainActivity
 import com.example.locker.R
 import com.example.locker.api.ApiClient
 import com.example.locker.models.RegisterUserRequest
@@ -44,16 +46,13 @@ class AddCardActivity : AppCompatActivity() {
                             call: Call<SimpleResponse>,
                             response: Response<SimpleResponse>
                         ) {
-                            if (response.isSuccessful) {
+                            val message = "${response.body()?.message}"
+                            if (message == "Success") {
                                 Toast.makeText(this@AddCardActivity, "User registered successfully. Please swipe your card.", Toast.LENGTH_SHORT).show()
-
-                                lifecycleScope.launch {
-                                    delay(6000)  // Wait for 6 seconds
-                                    checkCard(idCard)  // Replace idCard with the actual ID you want to check
-                                }
                             } else {
                                 Toast.makeText(this@AddCardActivity, "Failed to register user", Toast.LENGTH_SHORT).show()
                             }
+                            startActivity(Intent(this@AddCardActivity, MainActivity::class.java))
                         }
 
                         override fun onFailure(call: Call<SimpleResponse>, t: Throwable) {
@@ -64,22 +63,5 @@ class AddCardActivity : AppCompatActivity() {
                 Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
             }
         }
-    }
-
-    private fun checkCard(idCard: String) {
-        ApiClient.instance.checkCard(idCard).enqueue(object : Callback<SimpleResponse> {
-            override fun onResponse(call: Call<SimpleResponse>, response: Response<SimpleResponse>) {
-                if (response.isSuccessful) {
-                    val status = response.body()?.message
-                    Toast.makeText(this@AddCardActivity, "Card added successfully: Status $status", Toast.LENGTH_SHORT).show()
-                } else {
-                    Toast.makeText(this@AddCardActivity, "Failed to check card", Toast.LENGTH_SHORT).show()
-                }
-            }
-
-            override fun onFailure(call: Call<SimpleResponse>, t: Throwable) {
-                Toast.makeText(this@AddCardActivity, "Error: ${t.message}", Toast.LENGTH_SHORT).show()
-            }
-        })
     }
 }

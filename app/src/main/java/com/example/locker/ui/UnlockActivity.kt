@@ -28,7 +28,8 @@ class UnlockActivity : AppCompatActivity() {
                         call: Call<SimpleResponse>,
                         response: Response<SimpleResponse>
                     ) {
-                        if (response.isSuccessful) {
+                        val message = "${response.body()?.message}"
+                        if (message=="Success") {
                             Toast.makeText(this@UnlockActivity, "Door Unlocked", Toast.LENGTH_SHORT).show()
                         } else {
                             Toast.makeText(this@UnlockActivity, "Failed to unlock", Toast.LENGTH_SHORT).show()

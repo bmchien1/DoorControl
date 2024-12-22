@@ -1,6 +1,5 @@
 package com.example.locker.api
 
-import com.example.locker.models.CardCheckResponse
 import com.example.locker.models.HistoryResponse
 import com.example.locker.models.LoginRequest
 import com.example.locker.models.LoginResponse
@@ -18,11 +17,6 @@ interface ApiService {
     fun registerUser(
         @Header("Authorization") token: String,
         @Body registerUserRequest: RegisterUserRequest
-    ): Call<SimpleResponse>
-
-    @GET("iot/api/check-card/{idCard}")
-    fun checkCard(
-        @Path("idCard") idCard: String
     ): Call<SimpleResponse>
 
     @GET("iot/api/open-door")

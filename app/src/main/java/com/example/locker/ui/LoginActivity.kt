@@ -38,8 +38,9 @@ class LoginActivity : AppCompatActivity() {
                         call: Call<LoginResponse>,
                         response: Response<LoginResponse>
                     ) {
-                        if (response.isSuccessful) {
-                            val token = "Bearer ${response.body()?.token}"
+                        val fullName = "${response.body()?.fullName}"
+                        if (fullName == "admin") {
+                            val token = "${response.body()?.token}"
                             tokenManager.saveToken(token)
 
                             Toast.makeText(this@LoginActivity, "Login Successful", Toast.LENGTH_SHORT).show()
