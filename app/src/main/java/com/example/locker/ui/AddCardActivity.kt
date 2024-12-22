@@ -13,6 +13,7 @@ import com.example.locker.api.ApiClient
 import com.example.locker.models.RegisterUserRequest
 import com.example.locker.models.SimpleResponse
 import com.example.locker.utils.TokenManager
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import retrofit2.Call
@@ -36,8 +37,8 @@ class AddCardActivity : AppCompatActivity() {
             val fullName = fullNameEditText.text.toString().trim()
             val birthday = birthdayEditText.text.toString().trim()
             val phone = phoneEditText.text.toString().trim()
-            val idCard = "123456789"
-            if (token != null && fullName.isNotEmpty() && birthday.isNotEmpty() && phone.isNotEmpty() && idCard.isNotEmpty()) {
+
+            if (token != null && fullName.isNotEmpty() && birthday.isNotEmpty() && phone.isNotEmpty()) {
                 // Register user
                 val registerUserRequest = RegisterUserRequest(fullName, birthday, phone)
                 ApiClient.instance.registerUser("Bearer $token", registerUserRequest)
@@ -48,19 +49,19 @@ class AddCardActivity : AppCompatActivity() {
                         ) {
                             val message = "${response.body()?.message}"
                             if (message == "Success") {
-                                Toast.makeText(this@AddCardActivity, "User registered successfully. Please swipe your card.", Toast.LENGTH_SHORT).show()
+                                Snackbar.make(findViewById(android.R.id.content), "Card added successfully! Swipe the card now.", Snackbar.LENGTH_SHORT).show()
                             } else {
-                                Toast.makeText(this@AddCardActivity, "Failed to register user", Toast.LENGTH_SHORT).show()
+                                Snackbar.make(findViewById(android.R.id.content), "Failed to add card. Try again.", Snackbar.LENGTH_SHORT).show()
                             }
                             startActivity(Intent(this@AddCardActivity, MainActivity::class.java))
                         }
 
                         override fun onFailure(call: Call<SimpleResponse>, t: Throwable) {
-                            Toast.makeText(this@AddCardActivity, "Error: ${t.message}", Toast.LENGTH_SHORT).show()
+                            Snackbar.make(findViewById(android.R.id.content), "Error: ${t.message}", Snackbar.LENGTH_SHORT).show()
                         }
                     })
             } else {
-                Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
+                Snackbar.make(findViewById(android.R.id.content), "Please fill in all fields", Snackbar.LENGTH_SHORT).show()
             }
         }
     }

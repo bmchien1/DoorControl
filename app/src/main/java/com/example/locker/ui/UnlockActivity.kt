@@ -8,6 +8,7 @@ import com.example.locker.R
 import com.example.locker.api.ApiClient
 import com.example.locker.models.SimpleResponse
 import com.example.locker.utils.TokenManager
+import com.google.android.material.snackbar.Snackbar
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -30,14 +31,14 @@ class UnlockActivity : AppCompatActivity() {
                     ) {
                         val message = "${response.body()?.message}"
                         if (message=="Success") {
-                            Toast.makeText(this@UnlockActivity, "Door Unlocked", Toast.LENGTH_SHORT).show()
+                            Snackbar.make(findViewById(android.R.id.content), "Door unlocked successfully!", Snackbar.LENGTH_SHORT).show()
                         } else {
-                            Toast.makeText(this@UnlockActivity, "Failed to unlock", Toast.LENGTH_SHORT).show()
+                            Snackbar.make(findViewById(android.R.id.content), "Failed to unlock door. Try again.", Snackbar.LENGTH_SHORT).show()
                         }
                     }
 
                     override fun onFailure(call: Call<SimpleResponse>, t: Throwable) {
-                        Toast.makeText(this@UnlockActivity, "Error: ${t.message}", Toast.LENGTH_SHORT).show()
+                        Snackbar.make(findViewById(android.R.id.content), "Error: ${t.message}", Snackbar.LENGTH_SHORT).show()
                     }
                 })
             }

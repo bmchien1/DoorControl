@@ -2,6 +2,7 @@ package com.example.locker.ui
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -12,6 +13,7 @@ import com.example.locker.api.ApiClient
 import com.example.locker.models.LoginRequest
 import com.example.locker.models.LoginResponse
 import com.example.locker.utils.TokenManager
+import com.google.android.material.snackbar.Snackbar
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -32,27 +34,35 @@ class LoginActivity : AppCompatActivity() {
             val password = passwordField.text.toString()
 
             val loginRequest = LoginRequest(email, password)
-           ApiClient.instance.login(loginRequest)
+
+            ApiClient.instance.login(loginRequest)
                 .enqueue(object : Callback<LoginResponse> {
                     override fun onResponse(
                         call: Call<LoginResponse>,
                         response: Response<LoginResponse>
                     ) {
                         val fullName = "${response.body()?.fullName}"
-                        if (fullName == "admin") {
-                            val token = "${response.body()?.token}"
-                            tokenManager.saveToken(token)
+//                        Log.d("myTag", "${response.body()}")
+//                        Log.d("myTag", "${call}")
+                        if (response.body() != null) {
+                            val fullName = response.body()?.fullName
+                            if (fullName == "admin") {
+                                val token = "Bearer ${response.body()?.token}"
+                                tokenManager.saveToken(token)
+                                Snackbar.make(findViewById(android.R.id.content), "Login Successful", Snackbar.LENGTH_SHORT).show()
 
-                            Toast.makeText(this@LoginActivity, "Login Successful", Toast.LENGTH_SHORT).show()
-                            startActivity(Intent(this@LoginActivity, MainActivity::class.java))
-                            finish()
+                                startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+                                finish()
+                            } else {
+                                Snackbar.make(findViewById(android.R.id.content), "Login Failed: Not an admin", Snackbar.LENGTH_SHORT).show()
+                            }
                         } else {
-                            Toast.makeText(this@LoginActivity, "Login Failed", Toast.LENGTH_SHORT).show()
+                            Snackbar.make(findViewById(android.R.id.content), "Login Failed: ${response.message()}", Snackbar.LENGTH_SHORT).show()
                         }
                     }
 
                     override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
-                        Toast.makeText(this@LoginActivity, "Error: ${t.message}", Toast.LENGTH_SHORT).show()
+                        Snackbar.make(findViewById(android.R.id.content), "Error: ${t.message}", Snackbar.LENGTH_SHORT).show()
                     }
                 })
         }
