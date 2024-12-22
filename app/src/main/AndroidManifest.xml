@@ -31,6 +31,7 @@
 <!--        AddCardActivity-->
         <activity android:name=".ui.AddCardActivity" />
 
+
     </application>
 
 </manifest>

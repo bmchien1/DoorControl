@@ -3,32 +3,59 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="24dp"
+    android:background="@color/lightBackground"
+    android:gravity="center">
 
+    <!-- Add Card Button -->
     <Button
         android:id="@+id/btnAddCard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/button_background"
         android:text="Add Card"
-        android:layout_marginBottom="16dp" />
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        android:padding="12dp"
+        android:fontFamily="sans-serif-medium" />
 
+    <!-- View History Button -->
     <Button
         android:id="@+id/btnViewHistory"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/button_background"
         android:text="View History"
-        android:layout_marginBottom="16dp" />
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        android:padding="12dp"
+        android:fontFamily="sans-serif-medium" />
 
+    <!-- Unlock Door Button -->
     <Button
         android:id="@+id/btnUnlockDoor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/button_background"
         android:text="Unlock Door"
-        android:layout_marginBottom="16dp" />
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        android:padding="12dp"
+        android:fontFamily="sans-serif-medium" />
 
+    <!-- Logout Button -->
     <Button
         android:id="@+id/btnLogout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Logout" />
+        android:background="@drawable/button_background_red"
+        android:text="Logout"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        android:padding="12dp"
+        android:fontFamily="sans-serif-medium" />
+
 </LinearLayout>

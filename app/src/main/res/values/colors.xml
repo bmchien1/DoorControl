@@ -8,4 +8,7 @@
     <color name="colorOnPrimary">#FFFFFF</color>
     <color name="colorOnSecondary">#000000</color>
     <color name="material_dynamic_neutral10">#FAFAFA</color>
+    <color name="primaryColor">#6200EE</color>
+    <color name="primaryDarkColor">#3700B3</color>
+    <color name="lightBackground">#F5F5F5</color>
 </resources>
