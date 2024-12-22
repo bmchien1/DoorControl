@@ -4,7 +4,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object ApiClient {
-    private const val BASE_URL = "http://localhost/"
+    private const val BASE_URL = "https://aa7f-1-55-166-213.ngrok-free.app"
 
     val instance: ApiService by lazy {
         if (USE_MOCK) {
